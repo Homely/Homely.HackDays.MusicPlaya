@@ -18,7 +18,8 @@ class JsPlayer extends Component {
       seekMax: 0,
     };
     this.updateTimer = this.updateTimer.bind(this);
-    this.togglePlay = this.togglePlay.bind(this);
+    this.play = this.play.bind(this);
+    this.stop = this.stop.bind(this);
     this.toggleMute = this.toggleMute.bind(this);
     this.prev = this.prev.bind(this);
     this.next = this.next.bind(this);
@@ -42,9 +43,14 @@ class JsPlayer extends Component {
     this.setState({ currentTime: parseInt(audioPlayer.currentTime, 10), seekMax: audioPlayer.duration || 60 });
   }
 
-  togglePlay(e) {
+  play(e) {
     e.preventDefault();
     audioPlayer.play();
+  }
+
+  stop(e) {
+    e.preventDefault();
+    audioPlayer.pause();
   }
 
   prev(e) {
@@ -93,7 +99,8 @@ class JsPlayer extends Component {
         Playing: {currentIndex + 1} - {playlist[currentIndex]} <br />
         <img ref={(coverImage) => { this.coverImage = coverImage; }} className="Player-cover" src="cover.jpg" alt="" />
         <button onClick={this.prev}>⏮️</button>
-        <button ref={(play) => { this.play = play; }} onClick={this.togglePlay}>▶️</button>
+        <button onClick={this.stop}>⏸️</button>
+        <button onClick={this.play}>▶️</button>
         <button onClick={this.next}>⏭️</button>
         <input ref={(seekSlider) => { this.seekSlider = seekSlider; }} onChange={this.seek} type="range" value={currentTime} max={seekMax}/>
         <button ref={(mute) => { this.mute = mute; }} onClick={this.toggleMute}>🔇</button>

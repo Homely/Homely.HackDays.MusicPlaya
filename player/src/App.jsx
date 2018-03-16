@@ -13,7 +13,7 @@ const App = () => {
       <div className="App-intro">
         <h3>HTML Playa</h3>
         <Player />
-        <h3>Javascript Playa</h3>
+        <h3>React Playa</h3>
         <JsPlayer />
       </div>
     </div>
