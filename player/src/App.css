@@ -18,11 +18,16 @@
 }
 
 .App-title {
-  font-size: 1.5em;
+  font-size: 2.5em;
 }
 
 .App-intro {
   font-size: large;
+}
+
+h3 {
+  margin: 40px 0 20px;
+  font-size: 28px;
 }
 
 .App-player {
@@ -50,7 +55,22 @@
   font-size: 12px;
   width: 120px;
   bottom: 5px;
-  left: 45%;
+  right: 58px;
+}
+
+.Track-title {
+  font-weight: 600;
+  margin: 5px
+}
+
+.Track-artist {
+  font-style: italic;
+  margin: 0 5px 5px;
+}
+
+.List-item img {
+  width: 32px;
+  height: 32px;
 }
 
 @keyframes swing {

@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import _debounce from 'lodash/debounce';
 
 const playlist = [
-  'happy.m4a',
-  'sad.m4a',
-  'xmas.mp3',
+  { track: 'sad.m4a', title: 'Sad Machine', artist: 'Porter Robinson' },
+  { track: 'happy.m4a', title: 'New Way to Be Happy (Mitchell Southam Remix)', artist: 'Le Visiteur & Jova Radevska' },
+  { track: 'xmas.mp3', title: 'Stargate Christmas', artist: '(M)Rated' },
 ];
 
 let audioPlayer = new Audio();
@@ -16,6 +16,7 @@ class JsPlayer extends Component {
       currentIndex: 0,
       currentTime: 0,
       seekMax: 0,
+      tags: null,
     };
     this.updateTimer = this.updateTimer.bind(this);
     this.play = this.play.bind(this);
@@ -36,7 +37,7 @@ class JsPlayer extends Component {
   }
  
   createPlayer(index = this.state.currentIndex) {
-    audioPlayer.src = `./music/${playlist[index]}`;
+    audioPlayer.src = `./music/${playlist[index].track}`;
   }
 
   updateTimer() {
@@ -86,17 +87,18 @@ class JsPlayer extends Component {
   }
 
   renderTime() {
-    const { currentIndex, currentTime, seekMax } = this.state;
+    const { currentTime, seekMax } = this.state;
     return (
       <span className="App-player-seek-timer">{this.formatTime(currentTime)} - {this.formatTime(seekMax)}</span>
     );
   }
 
   render() {
-    const { currentIndex, currentTime, seekMax } = this.state;
+    const { currentIndex, currentTime, seekMax, tags } = this.state;
     return (
       <div className="App-player" ref={(container) => { this.container = container; }}>
-        Playing: {currentIndex + 1} - {playlist[currentIndex]} <br />
+        <div className="Track-title">{tags ? tags.title : playlist[currentIndex].title}</div>
+        <div className="Track-artist">by {tags ? tags.artist : playlist[currentIndex].artist}</div>
         <img ref={(coverImage) => { this.coverImage = coverImage; }} className="Player-cover" src="cover.jpg" alt="" />
         <button onClick={this.prev}>⏮️</button>
         <button onClick={this.stop}>⏸️</button>
