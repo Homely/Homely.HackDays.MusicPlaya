@@ -26,12 +26,31 @@
 }
 
 .App-player {
+  position: relative;
   display: inline-block;
   border: 1px solid #ccc;
   border-radius: 5px;
   margin: 0 10px;
   padding: 5px;
   box-shadow: 1px 3px 13px rgba(0, 0, 0, 0.1);
+}
+
+.App-player button {
+  background: transparent;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin: 5px;
+  padding: 5px;
+  box-shadow: 1px 3px 13px rgba(0, 0, 0, 0.1);
+  font-size: 16px;
+}
+
+.App-player-seek-timer {
+  position: absolute;
+  font-size: 12px;
+  width: 120px;
+  bottom: 5px;
+  left: 45%;
 }
 
 @keyframes swing {

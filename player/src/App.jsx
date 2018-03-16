@@ -11,9 +11,9 @@ const App = () => {
         <h1 className="App-title">Welcome all Playas</h1>
       </header>
       <div className="App-intro">
-        <h3>HTML Player</h3>
+        <h3>HTML Playa</h3>
         <Player />
-        <h3>Javascript Player</h3>
+        <h3>Javascript Playa</h3>
         <JsPlayer />
       </div>
     </div>

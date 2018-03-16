@@ -1,0 +1,32 @@
+{
+  "extends": "airbnb",
+  "rules": {
+    "react/jsx-closing-bracket-location": "off",
+    "react/jsx-filename-extension": "off",
+    "react/prefer-es6-class": "off",
+    "react/forbid-prop-types": 0,
+    "react/no-danger": 0,
+    "import/extensions": ["error", { "js": "never" }],
+    "global-require": "off",
+    "linebreak-style": "off",
+    "arrow-parens": "off",
+    "class-methods-use-this": "off",
+    "object-curly-newline": "off",
+    "no-unused-expressions": "off"
+  },
+  "plugins": [
+    "react"
+  ],
+  "env": {
+    "browser": true,
+  },
+  "globals": {
+    "describe": true,
+    "before": true,
+    "it": true,
+    "after": true,
+    "beforeEach": true,
+    "afterEach": true,
+  },
+  "parser": "babel-eslint"
+}
