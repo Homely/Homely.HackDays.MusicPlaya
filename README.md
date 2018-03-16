@@ -1,4 +1,4 @@
-# MusicPLaya 🎶
+# MusicPlaya 🎶
 HTML5-based, platform-agnostic playlist creator
 
 ## Goal
