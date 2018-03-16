@@ -23,6 +23,7 @@ class StreamPlayer extends Component {
     };
     this.updateTimer = this.updateTimer.bind(this);
     this.play = this.play.bind(this);
+    this.playThis = this.playThis.bind(this);
     this.stop = this.stop.bind(this);
     this.toggleMute = this.toggleMute.bind(this);
     this.prev = this.prev.bind(this);
@@ -45,18 +46,20 @@ class StreamPlayer extends Component {
   }
  
   createPlayer(index = this.state.currentIndex) {
-    this.stop();
+    audioPlayer && audioPlayer.pause();
     if (playlist[index].stream) {
       SoundCloud.stream(`/tracks/${playlist[index].stream}`).then(function(player){
         audioPlayer = player;
         audioPlayer.addEventListener('time', _debounce(this.updateTimer), 500);
         audioPlayer.addEventListener('finished', () => { this.skip(); });
+        this.play();
       });
     } else {
       audioPlayer = new Audio();
+      audioPlayer.src = `./music/${playlist[index].track}`;
       audioPlayer.addEventListener('timeupdate', _debounce(this.updateTimer), 500);
       audioPlayer.addEventListener('ended', () => { this.skip(); });
-      audioPlayer.src = `./music/${playlist[index].track}`;
+      this.play();
     }
   }
 
@@ -69,7 +72,7 @@ class StreamPlayer extends Component {
   }
 
   play() {
-    audioPlayer.play();
+    audioPlayer && audioPlayer.play();
   }
 
   stop() {
@@ -94,14 +97,14 @@ class StreamPlayer extends Component {
     this.playAtIndex(index);
   }
 
-  playThis(sender) {
-    this.playAtIndex(sender.data('index'))
+  playThis(e) {
+    const index = parseInt(e.currentTarget.dataset.index, 10);
+    this.playAtIndex(index);
   }
 
   playAtIndex(index) {
     this.setState({ currentIndex: index});
     this.createPlayer(index);
-    audioPlayer.play();
   }
 
   seek() {
@@ -139,16 +142,22 @@ class StreamPlayer extends Component {
   }
 
   renderPlaylist() {
-    <div>
-      Playlist
-      {playlist.map((song, ndx) => {
-        <div className="List-item" key={song.title} data-index={ndx} onClick={this.playThis}>
-          {this.renderIcon(song)}
-          {song.title}
-          {song.artist}
-        </div>
-      })}
-    </div>
+    return (
+      <div className="List">
+        Playlist
+        {playlist.map((song, ndx) => {
+          const className = ndx === this.state.currentIndex ? 'List-item active' : 'List-item';
+          return (
+            <div className={className} key={song.title} data-index={ndx} onClick={this.playThis}>
+              {this.renderIcon(song)}
+              <span className="List-item-title">{song.title}</span>
+              -
+              <span className="List-item-artist">{song.artist}</span>
+            </div>
+          );
+        })}
+      </div>
+    );
   }
 
   render() {
